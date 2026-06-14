@@ -1,3 +1,4 @@
+set disassembly-flavor intel
 display/15i $rip
 display/x $rbp
 display/x $rsp
