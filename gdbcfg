@@ -1,19 +1,20 @@
-display/15i 
-display/x 
-display/x 
-display/x 
-display/x 
-display/x 
-display/x 
-display/x 
-display/x 
-display/x 
-display/x 
-display/x 
-display/x 
-display/x 
-display/x 
-display/x 
-display/20gx 
+set disassembly-flavor intel
+display/15i $rip
+display/x $rbp
+display/x $rsp
+display/x $rax
+display/x $rbx
+display/x $rcx
+display/x $rdx
+display/x $rdi
+display/x $rsi
+display/x $r8
+display/x $r9
+display/x $r10
+display/x $r11
+display/x $r12
+display/x $r13
+display/x $r14
+display/20gx $rsp
 b main
 start hello
