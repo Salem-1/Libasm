@@ -23,7 +23,7 @@ extern	int 	ft_list_size(t_list *begin_list);
 extern void 	ft_list_push_front(t_list **begin_list, void *data);
 extern void 	ft_list_sort(t_list **begin_list, int (*cmp)());
 t_list*			create_list(int size);
-void 			swap_nodes(t_list **first, t_list *second, t_list *node_before);
+void 			swap_nodes(t_list **head, t_list *second, t_list *node_before);
 void			list_printer(t_list *head);
 void 			test_list_size(char **argv);
 void 			test_ft_list_push_front(char **argv);

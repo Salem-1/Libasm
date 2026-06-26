@@ -42,17 +42,23 @@ void	list_printer(t_list *head){
 	printf("End list Printer\n\n");
 }
 
+
 void	lprint(t_list *head, char * msg)
 {
 	t_list *count_me = head;
-	printf("%s\n", msg);
+	if (count_me != NULL)
+	{
+		printf("\033[33m[%s]\033[0m %p -> ", (char *)count_me->data, count_me);
+		count_me = count_me->next;
+	}
 	while (count_me != NULL)
 	{
-		printf("[%s]-> ", (char *)count_me->data);
+		printf("[%s] %p -> ", (char *)count_me->data, count_me);
 		count_me = count_me->next;
 	}
 	if (count_me == NULL)
-		printf("[NULL] ");
+		printf("[NULL] %p. ", count_me);
+	printf("\033[33m %s, size %i\033[0m\n", msg, ft_list_size(head));
 }
 
 void	list_cmp(t_list *head, t_list *test)
@@ -104,28 +110,40 @@ void 	mock_ft_list_push_front(t_list **begin_list, void *data){
 void print_node(t_list *node, char *msg)
 {
 	if (node)
-		printf("%s(%s)", msg, (char*)node->data);
+		printf("%s(%s) %p ", msg, (char*)node->data, node);
 	else
 		printf("%s(NULL)", msg);
 
 }
-void 	swap_nodes(t_list **head, t_list *second, t_list *node_before)
+void 			swap_nodes(t_list **head, t_list *second, t_list *node_before)
 {
 	t_list *first = *head;
+	print_node(node_before, "node before");
 	if (first == second)
+	{
+		printf("No swapping needed\n");
 		return;
+	}
 	if (node_before == *head)
 	{
-		printf("swapping second to head \n");
+		printf("\n=======================\n");
+		printf("\nSwapping second to head \n");
 		first->next = second->next;
 		second->next = first;
+		// (*node_before)->next = second;
 		*head = second;
+		lprint(*head, "\nINside controversial swap firs and second node\n");
+		printf("\nEnd controversial swap\n");
+		printf("\n=======================\n");
 		return;
 	}
 	t_list *first_next = first->next;
 	first->next = second->next;
 	second->next = first_next;
-	if (node_before != *head)
-		node_before->next = first;
+	(node_before)->next = first;
 	*head = second;
 }
+
+
+
+
