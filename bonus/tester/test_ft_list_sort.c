@@ -84,8 +84,8 @@ void 	mock_ft_list_sort(t_list **begin_list, int (*cmp)())
     t_list  *cursor;
     t_list  *tmp;
     t_list  *node_before;
-    t_list  *head = *begin_list;
     t_list  *perme_node_before; 
+    t_list  *head = *begin_list;
     t_list  *head_before = head;
 
 
@@ -169,7 +169,7 @@ void test_ft_list_sort(char **argv)
     printf("Mokcing list sort\n");
     lprint(head, "list starts\n");
     mock_ft_list_sort(&head, strcmp);
-    ft_list_sort(&head, strcmp);
+    ft_list_sort(&test, strcmp);
     
     lprint(head, "list finally\n");
     list_cmp(head, test);
