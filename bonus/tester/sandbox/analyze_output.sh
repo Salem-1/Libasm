@@ -91,7 +91,7 @@ x/26a 0x55555555a3a0 -128
 0x55555555a3d0: 0x0     0x411
 
 
-Where variables are stored:
+
 
 x/16a  0x555555559040 -32
 0x555555559020: 0x5     0x0
@@ -118,3 +118,7 @@ Current instructions:
 
 
 Smallest_node is on 0x555555559038
+
+
+display/26ag 0x55555555a3a0-128
+display/16ag 0x555555559040-32

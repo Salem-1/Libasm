@@ -171,7 +171,7 @@ normal_swap:
 
 
 case_swap_smallest_node_is_the_second_node:
-    mov rax, [rel smallest_node]
+    mov rax, [rel smallest_noden + t_list.next]
     mov [rel cursor + t_list.next], rax
 ; cursor->next = smallest_node->next;
     mov rax, [rel  cursor]
