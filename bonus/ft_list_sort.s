@@ -31,16 +31,16 @@ section .text
 global ft_list_sort
 extern ft_list_size
 
-extern lprint
-extern print_node
-extern printf
+; extern lprint
+; extern print_node
+; extern printf
 
 ft_list_sort:
     mov [rel cmp_function], rsi
     cmp rdi, 0x0
     je terminate_program
-    cmp BYTE [rdi], 0x0
-    je terminate_program
+    ; cmp BYTE [rdi], 0x0
+    ; je terminate_program
 ;    if (begin_list == NULL || *begin_list == NULL)
 ;         return ;
     mov [rel original_begin_list], rdi
@@ -79,8 +79,6 @@ outer_loop:
     xor rax, rax
     mov [rel j], rax
     
-    ; mov rdi, nl
-    ; call printf wrt ..plt
 
 inner_loop:
     mov rax, [rel list_size]
@@ -125,16 +123,9 @@ run_comp_function:
 update_smallest_node:
     mov rax, [rel node_before]
     mov [rel perme_node_before], rax
-    ;             perme_node_before = node_before;
+
     mov rbx, [rel tmp]
     mov [rel smallest_node], rbx
-    ;                smallest_node = tmp;
-    ; mov rdi, [rel smallest_node]
-    ; mov rsi, msn
-    ; call print_node
-    ; mov rdi, [rel smallest_node]
-    ; mov rsi, msn
-    ; call lprint
     jmp inner_loop
     
     
@@ -142,52 +133,25 @@ after_inner_loop:
     mov rax, [rel smallest_node]
     cmp rax, [rel cursor]
     je after_swap
-        ; if (cursor != smallest_node)
+
+normal_swap_data_only:
+    mov rax, [rel smallest_node]
     mov rbx, [rel cursor]
-    cmp [rel perme_node_before], rbx
-    je case_swap_smallest_node_is_the_second_node    
-    ; if (perme_node_before == cursor)
-
-
-normal_swap:
-    mov rbx, [rel cursor + t_list.next]
-; t_list *cursor_next = cursor->next;
-    mov rax, [rel smallest_node + t_list.next]
-    mov [rel cursor + t_list.next], rax 
-;                 cursor->next = smallest_node->next;
-    mov [rel smallest_node + t_list.next], rbx
-;                 smallest_node->next = cursor_next;
-    mov rax, [rel cursor]
-    mov [rel node_before + t_list.next], rax
-;                 (perme_node_before)->next = cursor;
-    mov rax, [rel smallest_node]
-    mov [rel cursor], rax
-;                 cursor = smallest_node;
-
-    ; mov rdi, [rel head]
-    ; mov rsi, msg
-    ; call lprint
-    jmp after_swap
-
-
-case_swap_smallest_node_is_the_second_node:
-    mov rax, [rel smallest_noden + t_list.next]
-    mov [rel cursor + t_list.next], rax
-; cursor->next = smallest_node->next;
-    mov rax, [rel  cursor]
-    mov [rel smallest_node + t_list.next], rax
-; smallest_node->next = cursor;
-    mov rax, [rel smallest_node]
-    mov [rel cursor], rax
-;     cursor = smallest_node;
-    mov rdi, [rel smallest_node]
-    mov rsi, msg
-    call lprint
+    mov rcx, [rax]
+    mov rdx, [rbx]
+    mov [rbx], rcx
+    mov [rax], rdx
 
 
 
  
 after_swap:
+    mov rax, [rel cursor]
+    mov rax, [rax + t_list.next]
+    mov [rel cursor], rax
+    mov [rel tmp], rax
+    mov [rel smallest_node], rax
+
     jmp outer_loop
 
 
@@ -200,10 +164,6 @@ normal_end:
 terminate_program:
     ret
 
-
-;     mov rdi, [rel tmp]
-    ; mov rsi, msg
-    ; call lprint
 
 
 

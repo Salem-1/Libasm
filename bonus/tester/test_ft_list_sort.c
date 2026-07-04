@@ -117,6 +117,8 @@ void test_ft_list_sort(char **argv)
     printf("Mokcing list sort\n");
     lprint(head, "list starts\n");
     printf("===================\n");
+    // head = NULL;
+    // test = NULL;
     mock_ft_list_sort(&head, strcmp);
     printf("--------------\n\n\n");
     ft_list_sort(&test, strcmp);

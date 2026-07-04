@@ -66,6 +66,12 @@ void	list_cmp(t_list *head, t_list *test)
 	t_list *count_head = head;
 	t_list *count_test = test;
 	printf("List cmp:\n");
+	if (count_head == NULL && count_test == NULL)
+	{
+		printf("Both linked lists are NULL\n");	
+		printf("TEST passed 😎\n\n");
+		return;
+	}
 	if ((count_head == NULL && count_test != NULL) ||
 		(count_head == NULL ) || (count_test == NULL) || (count_head->data != count_test->data))
 		{
