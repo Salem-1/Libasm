@@ -54,3 +54,67 @@ x/32a 0x555555558050 -120
 0x5555555580a8: 0x0     0x0
 0x5555555580b8: 0x0     0x0
 0x5555555580c8: 0x0     0x0
+
+
+
+start of adjacent node swap
+until *0x555555556094
+
+
+
+
+----------------
+new head 
+x/30a 0x55555555a3c8 -120
+
+stack variables
+
+
+I expect to swap the 5 and 1 so
+5 -> 1 -> 1 ...
+be 
+1 -> 5 -> 1 ...
+
+---------------------------------
+Where our list live in this itiration
+
+x/26a 0x55555555a3a0 -128
+0x55555555a340: 0x7fffffffd526  0x0
+0x55555555a350: 0x0     0x21
+0x55555555a360: 0x7fffffffd524  0x55555555a340
+0x55555555a370: 0x0     0x21
+0x55555555a380: 0x7fffffffd522  0x55555555a360
+0x55555555a390: 0x0     0x21
+0x55555555a3a0: 0x7fffffffd520  0x55555555a380
+0x55555555a3b0: 0x0     0x21
+0x55555555a3c0: 0x7fffffffd51e  0x55555555a3a0
+0x55555555a3d0: 0x0     0x411
+
+
+Where variables are stored:
+
+x/16a  0x555555559040 -32
+0x555555559020: 0x5     0x0
+0x555555559030: 0x7ffff7f2f010 <__strcmp_avx2>  0x55555555a3a0
+0x555555559040: 0x55555555a3c0  0x55555555a340
+0x555555559050: 0x55555555a360  0x55555555a3c0
+0x555555559060: 0x55555555a3c0  0x55555555a3c0
+0x555555559070: 0x101   0x400
+0x555555559080: 0x7fffffffce7000        0x6c626d6573734100
+0x555555559090: 0x2000646165482079      0x796c626d65737341
+
+
+
+------------------
+Current instructions:
+0x555555556084 <c_swap>:          mov    rax,QWORD PTR [rip+0x2fb5]        # 0x555555559040: smallest_node->next
+0x55555555608b <c_swap+7>:       mov    QWORD PTR [rip+0x2fb6],rax        # 0x555555559048: cursor -> next
+0x555555556092 <c_swap+14>:      mov    rax,QWORD PTR [rip+0x2fa7]        # 0x555555559040: cursor
+0x555555556099 <c_swap+21>:      mov    QWORD PTR [rip+0x2fa0],rax        # 0x555555559040: smallest_node -> next
+0x5555555560a0 <c_swap+28>:      mov    rax,QWORD PTR [rip+0x2f91]        # 0x555555559038: smallest node
+0x5555555560a7 <c_swap+35>:      mov    QWORD PTR [rip+0x2f92],rax        # 0x555555559040: cursor
+
+555555559039
+
+
+Smallest_node is on 0x555555559038

@@ -95,19 +95,15 @@ inner_loop:
     mov [rel j], rcx
 ;  for(int j = 0; j < list_size - i && tmp != NULL; j++)
 ;         {
-    mov rax, [rel tmp]
-    mov [rel node_before], rax
+tmp_equal_tmp_next:
+    mov rbx, [rel tmp]
+    mov [rel node_before], rbx
 ; node_before = tmp;
-    mov rax, [rel tmp]
+run_comp_function:
+    mov rax, [rel tmp + t_list.next]
     mov rax, [rax + t_list.next]
     mov [rel tmp], rax 
-;             tmp = tmp->next;
-    
-
-    ; mov rdi, rax 
-    ; mov rsi, msn
-    ; call print_node
-    
+;    tmp = tmp->next;
     cmp rax, 0x0
     je after_inner_loop
     mov rbx, [rel smallest_node]
@@ -116,13 +112,14 @@ inner_loop:
 ;   if (tmp == NULL || smallest_node == NULL)
 ;                 break; 
 
-    mov rdi, [rel tmp ]
+    mov rdi, [rel smallest_node ]
     mov rdi, [rdi + t_list.data]
-    mov rsi, [rel smallest_node ]
+    mov rsi, [rel tmp ]
     mov rsi, [rsi + t_list.data]
     call [rel cmp_function]
-    cmp rax, 0x0
-    jle inner_loop
+    cmp eax, 0x0  ; using the rax yield to positive integer as it 000 the upper r part  
+    jg  update_smallest_node
+    jmp inner_loop
     ; if (cmp(smallest_node->data, tmp->data) > 0)
 
 update_smallest_node:
@@ -131,22 +128,67 @@ update_smallest_node:
     ;             perme_node_before = node_before;
     mov rbx, [rel tmp]
     mov [rel smallest_node], rbx
-    mov rdi, rbx
-    mov rsi, msn
-    call print_node
     ;                smallest_node = tmp;
-
-
-
-
-
+    ; mov rdi, [rel smallest_node]
+    ; mov rsi, msn
+    ; call print_node
+    ; mov rdi, [rel smallest_node]
+    ; mov rsi, msn
+    ; call lprint
     jmp inner_loop
     
     
 after_inner_loop: 
-    jmp outer_loop
+    mov rax, [rel smallest_node]
+    cmp rax, [rel cursor]
+    je after_swap
+        ; if (cursor != smallest_node)
+    mov rbx, [rel cursor]
+    cmp [rel perme_node_before], rbx
+    je case_swap_smallest_node_is_the_second_node    
+    ; if (perme_node_before == cursor)
+
+
+normal_swap:
+    mov rbx, [rel cursor + t_list.next]
+; t_list *cursor_next = cursor->next;
+    mov rax, [rel smallest_node + t_list.next]
+    mov [rel cursor + t_list.next], rax 
+;                 cursor->next = smallest_node->next;
+    mov [rel smallest_node + t_list.next], rbx
+;                 smallest_node->next = cursor_next;
+    mov rax, [rel cursor]
+    mov [rel node_before + t_list.next], rax
+;                 (perme_node_before)->next = cursor;
+    mov rax, [rel smallest_node]
+    mov [rel cursor], rax
+;                 cursor = smallest_node;
+
+    ; mov rdi, [rel head]
+    ; mov rsi, msg
+    ; call lprint
+    jmp after_swap
+
+
+case_swap_smallest_node_is_the_second_node:
+    mov rax, [rel smallest_node]
+    mov [rel cursor + t_list.next], rax
+; cursor->next = smallest_node->next;
+    mov rax, [rel  cursor]
+    mov [rel smallest_node + t_list.next], rax
+; smallest_node->next = cursor;
+    mov rax, [rel smallest_node]
+    mov [rel cursor], rax
+;     cursor = smallest_node;
+    mov rdi, [rel smallest_node]
+    mov rsi, msg
+    call lprint
+
+
 
  
+after_swap:
+    jmp outer_loop
 
 
 

@@ -55,6 +55,7 @@ void 	mock_ft_list_sort(t_list **begin_list, int (*cmp)())
             {
                 perme_node_before = node_before;
                 smallest_node = tmp;
+                // print_node(smallest_node, "\n");
             }
         }
         if (cursor != smallest_node)
@@ -64,6 +65,7 @@ void 	mock_ft_list_sort(t_list **begin_list, int (*cmp)())
         		cursor->next = smallest_node->next;
         		smallest_node->next = cursor;
         		cursor = smallest_node;
+                // lprint(cursor, "cursor now ");
         	}
             else
             {
@@ -114,6 +116,7 @@ void test_ft_list_sort(char **argv)
     t_list *test = fill_list_for_the_test(argv);
     printf("Mokcing list sort\n");
     lprint(head, "list starts\n");
+    printf("===================\n");
     mock_ft_list_sort(&head, strcmp);
     printf("--------------\n\n\n");
     ft_list_sort(&test, strcmp);
