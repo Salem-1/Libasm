@@ -10,7 +10,7 @@ section .text
 global ft_list_sort
 extern malloc
 
-ft_list_sort:
+ft_list_remove_if:
     xor rax, rax
     ret
 

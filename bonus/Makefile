@@ -12,6 +12,10 @@ EXEC = a.out
 
 all: $(NAME)
 
+# required by libasmTester and 42libasm_tester (they run `make bonus` here);
+# bonus objects are already part of $(NAME)
+bonus: $(NAME)
+
 %.o: %.s
 	$(ASM) $(ASMFLAGS) $< -o $@
 
@@ -32,7 +36,7 @@ fclean: clean
 re: fclean all
 
 
-.PHONY: all clean fclean re run
+.PHONY: all bonus clean fclean re run
 
 # $<: firsrt dependency
 # $@: target 
