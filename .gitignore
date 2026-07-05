@@ -5,9 +5,7 @@ app
 System Volume Information/IndexerVolumeGuid
 documentation
 Dockerfile
-.gitignore
 docker-compose.yml
-Makefile
 r4b
 *.o
 *.out
