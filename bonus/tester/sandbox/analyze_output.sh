@@ -120,5 +120,74 @@ Current instructions:
 Smallest_node is on 0x555555559038
 
 
-display/26ag 0x55555555a3a0-128
-display/16ag 0x555555559040-32
+display/26ag 0x2aaaab2ab448-128
+display/16ag 0x2aaaab503850-32
+-------------------------------------------------
+
+Free node
+
+----------------------------------
+
+
+
+
+
+
+(gdb) x/16a  0xffffa31a3020 -32
+
+0xffffa31a3000: 0x0     0xffffa31a3008
+0xffffa31a3010: 0x2aaaab2ab400  0x2aaaab2ab7ca
+0xffffa31a3020: 0x2aaaab2ab440  0x2aaaab2ab420
+0xffffa31a3030: 0xffffa31a03d0 <ft_strcmp>      0xffffa319f332 <free_fct>
+0xffffa31a3040: 0x0     0x0
+0xffffa31a3050: 0x206f742065646f4e      0xa65766f6d6572
+0xffffa31a3060: 0x0     0x0
+0xffffa31a3070: 0x0     0x0
+
+
+
+x/24a 0xffff91c82040 -128
+0x2aaaab5033e0: 0x2aaaab2ab7d2  0x0
+0x2aaaab5033f0: 0x0     0x21
+0x2aaaab503400: 0x2aaaab2ab7d0  0x2aaaab5033e0
+0x2aaaab503410: 0x0     0x21
+0x2aaaab503420: 0x2aaaab2ab7ce  0x2aaaab503400
+0x2aaaab503430: 0x0     0x21
+0x2aaaab503440: 0x2aaaab2ab7cc  0x2aaaab503420
+0x2aaaab503450: 0x0     0x21
+0x2aaaab503460: 0x2aaaab2ab7ca  0x2aaaab503440
+0x2aaaab503470: 0x0     0xffb91
+0x2aaaab503480: 0x0     0x0
+0x2aaaab503490: 0x0     0x0
+
+
+remove_head:
+    mov rax, [rel tmp_node] ; This is the node to remove
+    mov rbx, [rax + t_list.next] this is where the next is pointing to 
+    mov rcx, [rbx + t_list.next] I wonder why we need the next next, and what if it's null'
+    mov rdi, [rax]
+    mov [rel tmp_node], rbx
+    mov [rel node_before], rcx
+    call [rel free_function]
+    jmp node_checker_loop
+
+
+
+-----------------------------------------
+0x2aaaab503420: 0x2aaaab5033a0  0x0
+0x2aaaab503430: 0x0     0x21
+0x2aaaab503440: 0x2aaaab503360  0x2aaaab503420
+0x2aaaab503450: 0x0     0x21
+0x2aaaab503460: 0x2aaaab503340  0x2aaaab503440
+---------------------
+
+0x2aaaab503420: 0x2aaaab5033a0  0x0
+0x2aaaab503430: 0x0     0x21
+0x2aaaab503440: 0x2aaaab503360  0x2aaaab503420
+0x2aaaab503450: 0x0     0x21
+0x2aaaab503460: 0x2aaaab503340  0x2aaaab503440
+
+---------------------------
+
+
+0x2aaaab503340: 0x2aaaab503320  0x0

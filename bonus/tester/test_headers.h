@@ -31,8 +31,10 @@ void			list_cmp(t_list *head, t_list *test);
 void 			mock_ft_list_push_front(t_list **begin_list, void *data);
 void 			mock_ft_list_sort(t_list **begin_list, int (*cmp)());
 void 			test_ft_list_sort(char **argv);
+void 			test_ft_list_remove_if(char **argv);
 void			lprint(t_list *head, char * msg);
 void 			print_node(t_list *node, char *msg);
+t_list*			fill_list_for_the_test(char **argv);
 t_list*			create_list(int size);
 
 #endif

@@ -1,18 +1,5 @@
 set disassembly-flavor intel
 
-# Custom 4-pane layout: registers (top), C source, assembly, then status + command
-#tui new-layout dev src 2 asm 2 regs 1 status 1 cmd 1
-#layout dev
-
-
-
-tui new-layout dev asm 2 regs 1 status 1 cmd 1
-#layout dev
-#set tui mouse-events off
-
-
-# Stack view (no TUI window type for this, so it prints below)
-#display/20gx $rsp
 
 display/15i $rip
 display/x $rbp
@@ -33,9 +20,10 @@ display/x $r14
 display/x $r15
 display/20gx $rsp
 display/t $eflags 
+# display/24ag 0x2aaaab5033a0 -128
+# display/16ag  0xffffb85c8020 -32
 
 
-
-b main
-start 5 1 1 3 2
+b ft_list_remove_if
+start 3  
 continue

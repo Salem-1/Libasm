@@ -9,12 +9,12 @@
 int main(int argc, char **argv)
 {
 
-	if (argc < 2)
-	{
-		printf("Please enter at least one argument then rerun the program\n");
-		return (1);
-	}
-	test_ft_list_sort(argv);
+	// if (argc < 2)
+	// {
+	// 	printf("Please enter at least one argument then rerun the program\n");
+	// 	return (1);
+	// }
+	test_ft_list_remove_if(argv);
 	/*
 	test_ft_list_push_front(argv);
 	test_list_size(argv);

@@ -72,31 +72,32 @@ void	list_cmp(t_list *head, t_list *test)
 		printf("TEST passed 😎\n\n");
 		return;
 	}
-	if ((count_head == NULL && count_test != NULL) ||
-		(count_head == NULL ) || (count_test == NULL) || (count_head->data != count_test->data))
-		{
-			printf("FAILED 😱");
-			if (count_head == NULL)
-				printf("the head is NULL\n");
-			if (count_head == NULL)
-				printf("the test is NULL\n");
-			// printf("\t[%i]      , address %p != \t[%i]      , address %p \n", *(int *)count_head->data, count_head, 
-			// 																  *(int *)count_test->data, count_test);
-			printf("FAILED 😬\n");
-			return ; 
-		}
-	while ((count_head != NULL) && (count_test != NULL))
+	while (1)
 	{
-		if ((count_head == NULL) || (count_test == NULL) || (count_head->data != count_test->data))
+		if (count_head == NULL && count_test == NULL)
+			break;
+
+		if (count_head == NULL)
 		{
-			printf("FAILED 😱");
+			printf("Head = Null Test failed 😱\n");
+			return ;
+		}
+		if (count_test == NULL)
+		{
+			printf("Test = Null Test failed 😱\n");
+			return ;
+
+		}
+		if (ft_strcmp(count_head->data, count_test->data) != 0)
+		{
 			printf("\t[%i]      , address %p != \t[%i]      , address %p \n", *(int *)count_head->data, count_head, 
-																			  *(int *)count_test->data, count_test);
-			printf("FAILED 😬\n");
+			*(int *)count_test->data, count_test);
+			printf("\vFAILED 😱\n\n");
 			return ; 
 		}
 		count_head = count_head->next;
 		count_test = count_test->next;
+
 	}
 
 	printf("TEST passed 😎\n\n");

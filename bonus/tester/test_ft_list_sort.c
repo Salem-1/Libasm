@@ -124,6 +124,7 @@ void test_ft_list_sort(char **argv)
     ft_list_sort(&test, strcmp);
     printf("\n\n--------------\n");
     
+    lprint(head, "Head list finally\n");
     list_cmp(head, test);
     lprint(test, "Test list finally\n");
 }
