@@ -23,6 +23,7 @@ extern	int 	ft_list_size(t_list *begin_list);
 extern 	void 	ft_list_push_front(t_list **begin_list, void *data);
 extern 	void 	ft_list_sort(t_list **begin_list, int (*cmp)());
 extern 	void 	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (*free_fct)(void *));
+extern	int		ft_atoi_base(char *str, char *base);
 void 			swap_nodes(t_list **head, t_list *second, t_list *node_before);
 void			list_printer(t_list *head);
 void 			test_list_size(char **argv);
@@ -32,9 +33,11 @@ void 			mock_ft_list_push_front(t_list **begin_list, void *data);
 void 			mock_ft_list_sort(t_list **begin_list, int (*cmp)());
 void 			test_ft_list_sort(char **argv);
 void 			test_ft_list_remove_if(char **argv);
+void 			test_ft_test_atoi_base(char **argv);
 void			lprint(t_list *head, char * msg);
 void 			print_node(t_list *node, char *msg);
 t_list*			fill_list_for_the_test(char **argv);
 t_list*			create_list(int size);
+
 
 #endif

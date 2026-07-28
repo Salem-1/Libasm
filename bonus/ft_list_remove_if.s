@@ -12,9 +12,9 @@ section .data
     msg             db "Node to remove", 0xa, 0x0
 
 section .text
-global ft_list_remove_if
 extern free
 extern print_node
+global ft_list_remove_if
 
 ft_list_remove_if:
     cmp rdi, 0x0
