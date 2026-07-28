@@ -7,12 +7,13 @@ section .data
     cmp_function    dq 0x00
     free_function   dq 0x00
     tmp_node        dq 0x00
+    node_to_free    dq 0x00
     node_before     dq 0x00
     msg             db "Node to remove", 0xa, 0x0
 
 section .text
 global ft_list_remove_if
-extern malloc
+extern free
 extern print_node
 
 ft_list_remove_if:
@@ -64,10 +65,13 @@ remove_node:
 
 remove_head:
     mov rax, [rel tmp_node]
+    mov [rel node_to_free], rax
     mov rbx, [rax + t_list.next]
     mov rdi, [rax]
     mov [rel tmp_node], rbx
     call [rel free_function]
+    mov rdi, [rel node_to_free]
+    call free wrt ..plt 
     mov rax, [rel tmp_node]
     mov rbx, [rel begin_list]
     mov [rbx], rax
@@ -85,6 +89,8 @@ case_non_head_node:
     mov rdi, [rel tmp_node]
     mov rdi, [rdi]
     call [rel free_function]
+    mov rdi, [rel tmp_node]
+    call free wrt ..plt 
     mov rax, [rel node_before]
     mov rcx, [rax + t_list.next]
     mov [rel tmp_node], rcx
